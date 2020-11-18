@@ -2,6 +2,7 @@ package life.han.community.community.controller;
 
 import life.han.community.community.Provider.GitHubProvider;
 import life.han.community.community.dto.AccesstokenDTO;
+import life.han.community.community.dto.GithubUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,10 @@ public class AuthorizeController {
         accesstokenDTO.setRedirect_uri("http://localhost:8888/callback");
         accesstokenDTO.setState(state);
         accesstokenDTO.setClient_id("931c7ff5a6cef5c89d08");
-        accesstokenDTO.setClient_secret(" f3a90ffaca84cb85e75db963e1bf0960b09d7f82");
-        gitHubProvider.getAccessToken(accesstokenDTO);
+        accesstokenDTO.setClient_secret("327971fa58ec53f95a2f32a7aef513be3e060495");
+        String accessToken = gitHubProvider.getAccessToken(accesstokenDTO);
+        GithubUser getuer = gitHubProvider.getuser(accessToken);
+        System.out.println(getuer.getName());
         return "index";
     }
 }
